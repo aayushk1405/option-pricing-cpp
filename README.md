@@ -45,12 +45,6 @@ The design emphasizes clean abstractions, polymorphism, and numerical convergenc
 
 ## Sample Parameters
 
-S-> Current Stock price
-K-> Strike price
-σ-> volatality
-r-> risk-free rate
-T-> time to maturity/expiry
-
 | Parameter | Value |
 |-----------|-------|
 | S         | 100   |
@@ -58,6 +52,14 @@ T-> time to maturity/expiry
 | σ         | 20%   |
 | r         | 5%    |
 | T         | 1 yr  |
+
+Where:
+- $S$ is the current stock price
+- $K$ is the strike price
+- $r$ is the risk-free interest rate
+- $T$ is time to maturity
+- $N(\cdot)$ is the standard normal CDF
+
 
 ---
 ## Sample Output
@@ -82,22 +84,8 @@ Put Delta: -0.363
 * Binomial Tree prices converge to the analytical solution as the number of steps increases.
 
 ---
-## Build & Run
 
-```bash
-# Compile
-g++ -std=c++17 -O2 main.cpp -o Option_pricing
-
-# Run
-./Option_pricing
-
-```md
-
-- Implemented in a single translation unit for simplicity and ease of review
-- Architecture is designed to scale naturally to multi-file projects
-- Emphasis placed on correctness, numerical convergence, and clean abstractions
-
-##Mathematical Formulas for Price Computation
+## Mathematical Formulas for Price Computation
 
 Where:
 - $S$ is the current stock price
@@ -107,7 +95,6 @@ Where:
 - $N(\cdot)$ is the standard normal CDF
 
 ### Monte Carlo Simulation
-
 Under the risk-neutral measure, the terminal stock price is simulated as:
 
 $$
@@ -116,7 +103,6 @@ S_T = S \exp\left((r - \frac{1}{2}\sigma^2)T + \sigma \sqrt{T} Z\right),
 $$
 
 ### Black–Scholes Formula
-
 The Black–Scholes model provides a closed-form solution for pricing European options.
 
 $$
@@ -137,14 +123,24 @@ d_2 = d_1 - \sigma \sqrt{T}
 $$
 
 ### Binomial Tree Pricing
-
 Option values are computed via backward induction(for both American and European Options):
 
 $$
 V_t^{(j)} = e^{-r\Delta t} \left[p V_{t+\Delta t}^{(j+1)} + (1-p)V_{t+\Delta t}^{(j)}\right]
 $$
 
+## Build & Run
 
+```bash
+# Compile
+g++ -std=c++17 -O2 main.cpp -o Option_pricing
 
+# Run
+./Option_pricing
 
+```md
+
+- Implemented in a single translation unit for simplicity and ease of review
+- Architecture is designed to scale naturally to multi-file projects
+- Emphasis placed on correctness, numerical convergence, and clean abstractions
 
