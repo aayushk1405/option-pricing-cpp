@@ -1,5 +1,6 @@
 # Option Pricing Engine in C++
 
+
 This project implements a modular option pricing engine in C++ for European options.  
 It compares analytical and numerical pricing approaches using Black–Scholes, Monte Carlo simulation, and Binomial Tree models.  
 The design emphasizes clean abstractions, polymorphism, and numerical convergence.
@@ -86,10 +87,17 @@ Put Delta: -0.363
 
 ```bash
 # Compile
-g++ -std=c++17 -O2 main.cpp -o pricer
+g++ -std=c++17 -O2 main.cpp -o Option_pricing
 
 # Run
-./pricer
+./Option_pricing
+
+```md
+
+- Implemented in a single translation unit for simplicity and ease of review
+- Architecture is designed to scale naturally to multi-file projects
+- Emphasis placed on correctness, numerical convergence, and clean abstractions
+
 
 
 
