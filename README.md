@@ -1,6 +1,5 @@
 # Option Pricing Engine in C++
 
-
 This project implements a modular option pricing engine in C++ for European options.  
 It compares analytical and numerical pricing approaches using Black–Scholes, Monte Carlo simulation, and Binomial Tree models.  
 The design emphasizes clean abstractions, polymorphism, and numerical convergence.
@@ -97,6 +96,53 @@ g++ -std=c++17 -O2 main.cpp -o Option_pricing
 - Implemented in a single translation unit for simplicity and ease of review
 - Architecture is designed to scale naturally to multi-file projects
 - Emphasis placed on correctness, numerical convergence, and clean abstractions
+
+##Mathematical Formulas for Price Computation
+
+Where:
+- $S$ is the current stock price
+- $K$ is the strike price
+- $r$ is the risk-free interest rate
+- $T$ is time to maturity
+- $N(\cdot)$ is the standard normal CDF
+
+### Monte Carlo Simulation
+
+Under the risk-neutral measure, the terminal stock price is simulated as:
+
+$$
+S_T = S \exp\left((r - \frac{1}{2}\sigma^2)T + \sigma \sqrt{T} Z\right),
+\quad Z \sim \mathcal{N}(0,1)
+$$
+
+### Black–Scholes Formula
+
+The Black–Scholes model provides a closed-form solution for pricing European options.
+
+$$
+C = S N(d_1) - K e^{-rT} N(d_2)
+$$
+
+$$
+P = K e^{-rT} N(-d_2) - S N(-d_1)
+$$
+
+Where:
+$$
+d_1 = \frac{\ln(S / K) + (r + \frac{1}{2}\sigma^2)T}{\sigma \sqrt{T}}
+$$
+
+$$
+d_2 = d_1 - \sigma \sqrt{T}
+$$
+
+### Binomial Tree Pricing
+
+Option values are computed via backward induction(for both American and European Options):
+
+$$
+V_t^{(j)} = e^{-r\Delta t} \left[p V_{t+\Delta t}^{(j+1)} + (1-p)V_{t+\Delta t}^{(j)}\right]
+$$
 
 
 
