@@ -4,6 +4,10 @@ This project implements a modular option pricing engine in C++ for European opti
 It compares analytical and numerical pricing approaches using Black–Scholes, Monte Carlo simulation, and Binomial Tree models.  
 The design emphasizes clean abstractions, polymorphism, and numerical convergence.
 
+- Implemented in a single translation unit for simplicity and ease of review
+- Architecture is designed to scale naturally to multi-file projects
+- Emphasis placed on correctness, numerical convergence, and clean abstractions
+
 ---
 ## Pricing Models
 
@@ -129,6 +133,7 @@ $$
 V_t^{(j)} = e^{-r\Delta t} \left[p V_{t+\Delta t}^{(j+1)} + (1-p)V_{t+\Delta t}^{(j)}\right]
 $$
 
+
 ## Build & Run
 
 ```bash
@@ -139,8 +144,3 @@ g++ -std=c++17 -O2 main.cpp -o Option_pricing
 ./Option_pricing
 
 ```md
-
-- Implemented in a single translation unit for simplicity and ease of review
-- Architecture is designed to scale naturally to multi-file projects
-- Emphasis placed on correctness, numerical convergence, and clean abstractions
-
